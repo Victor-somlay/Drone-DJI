@@ -55,13 +55,39 @@ with mp_face_mesh.FaceMesh(
     
     
 #-------------------A Compléter-----------------------
+while True:
+    n_total_frames += 1
+
+    # Obtaining video
+    image = np.fliplr(frame_read.frame)
+
+    # Calculate brightness
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    brightness(image)
+
+    # Calculating face recognition
+    results = face_mesh.process(image)
+
+    # Draw the face mesh annotations on the image.
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    if results.multi_face_landmarks:
+        n_detection += 1
 
 
+  for face_landmarks in results.multi_face_landmarks:
+    head_barycenter, nose_coord, distance2screen = detect_N_show(image, face_landmarks,
+                                                                  mp_face_mesh.FACEMESH_FACE_OVAL,
+                                                                  face_mesh_lips_positions,
+                                                                  face_oval_landmarks_positions)
 
-    if ???:
-      
-        
-      for ??? in ????:
+    mp_drawing.draw_landmarks(
+        image=image,
+        landmark_list=face_landmarks,
+        connections=mp_face_mesh.FACEMESH_TESSELATION,
+        landmark_drawing_spec=None,
+        connection_drawing_spec=mp_drawing_styles
+            .get_default_face_mesh_tesselation_style())
+
           
         
 #-----------------------------------------------------
