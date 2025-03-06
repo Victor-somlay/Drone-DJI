@@ -61,7 +61,19 @@ while t != 10000:
             print("Backflip déclenché !")
             drone.flip("b")
             time.sleep(0.5)  # Pause pour éviter des flips répétés
+
+         # Si deux doigts sont levés, on fait un backflip
+        if etat_dgt.tolist() == [0,1,1,0,0] :
+            print("Backflip déclenché !")
             drone.flip("f")
+            time.sleep(0.5)  # Pause pour éviter des flips répétés
+        
+        if etat_dgt.tolist() == [1,0,0,0,0] :
+            print("Backflip déclenché !")
+            drone.land()
+
+
+
 
     cv.imshow("Image", img)
     cv.waitKey(1)
