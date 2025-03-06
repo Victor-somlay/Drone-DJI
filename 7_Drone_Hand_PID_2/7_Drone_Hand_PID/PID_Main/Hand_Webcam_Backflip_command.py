@@ -57,10 +57,11 @@ while t != 10000:
             cv.putText(img, msg, tuple(points[dgt, :].astype(int) + marge), 1, 2, (255, 0, 255), 2)
 
         # Si deux doigts sont levés, on fait un backflip
-        if nb_fingers == 2:
+        if etat_dgt.tolist() == [1,0,0,0,1] :
             print("Backflip déclenché !")
             drone.flip("b")
-            time.sleep(1)  # Pause pour éviter des flips répétés
+            time.sleep(0.5)  # Pause pour éviter des flips répétés
+            drone.flip("f")
 
     cv.imshow("Image", img)
     cv.waitKey(1)
